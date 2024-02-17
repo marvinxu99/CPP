@@ -1,0 +1,4 @@
+/*
+    Prefer using STL array or vector instead of a C array
+    Prefer using STL vector by default unless you have a reason to use a different container
+*/

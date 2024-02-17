@@ -1,0 +1,49 @@
+
+// Enable compiler to support c++20
+(1) File -> preferences -> settings
+
+(2) Search for runner executor map
+
+(3) Click on code-runner: Executor Map ==> "Edit in settings.json"
+
+
+
+// Another way to do it: 
+Go Extension -> Click "Code Runner" 's gear icon -> Click "Configure Extension Settings" -> Search "Code-runner: Executor Map" -> Click "Edit in settings.json" then you will see a .json code like this(could be different depending on your system setting)
+
+{
+    "C_Cpp.updateChannel": "Insiders",
+    "editor.fontSize": 14,
+    "window.zoomLevel": 0,
+    "atomKeymap.promptV3Features": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.formatOnPaste": true,
+    "code-runner.runInTerminal": true,
+    "C_Cpp.default.cppStandard": "c++14",
+    "C_Cpp.default.cStandard": "c11",
+}
+You can add entry like this. "code-runner.executorMap": { ~ 
+
+ {
+    "C_Cpp.updateChannel": "Insiders",
+    "editor.fontSize": 14,
+    "window.zoomLevel": 0,
+    "atomKeymap.promptV3Features": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.formatOnPaste": true,
+    "code-runner.runInTerminal": true,
+    "C_Cpp.default.cppStandard": "c++14",
+    "C_Cpp.default.cStandard": "c11",
+    "code-runner.executorMap": {
+        "javascript": "node",
+        "php": "C:\\php\\php.exe",
+        "python": "python",
+        "perl": "perl",
+        "ruby": "C:\\Ruby23-x64\\bin\\ruby.exe",
+        "go": "go run",
+        "html": "\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\"",
+        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "cpp": "cd $dir && g++ -std=c++14 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+    }
+}

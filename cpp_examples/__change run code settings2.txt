@@ -1,0 +1,7 @@
+(1) File -> preferences -> settings
+
+(2) Search for runner executor map
+
+(3) Click on code-runner: Executor Map ==> "Edit in settings.json"
+
+

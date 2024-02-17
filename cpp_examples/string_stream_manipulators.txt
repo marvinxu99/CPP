@@ -1,0 +1,29 @@
+Manipulator	Member function	Action
+s<<setbase(b)	n/a	Output integers in base b
+s<<setfill(c)	s.fill(c)	Use c as fill character when padding
+s<<setprecision(p)	s.precision(p)	Set default precision for floating-point
+s<<setw(n)	s.width(n)	Set pad width for next output field
+s<<showbase	s.setf(ios_base::showbase)	Prefix octal numbers with ‘0’ and…
+s<<noshowbase	s.unsetf(ios_base::showbase)	…hexadecimal numbers with ‘0x’
+s<<showpoint	s.setf(ios_base::showpoint)	Always show decimal point for floats, 12.
+s<<noshowpoint	s.unsetf(ios_base::showpoint)	Never show trailing point for floats
+s<<showpos	s.setf(ios_base::showpos)	Show preceding + for positive numbers
+s<<noshowpos	s.unsetf(ios_base::showpos)	Never show preceding +
+s<<uppercase	s.setf(ios_base::uppercase)	Output hex and floats in uppercase, 0XA2 1.2E3
+s<<nouppercase	s.unsetf(ios_base::uppercase)	Output hex and floats in lowercase, 0xa2 1.2e3
+s<<unitbuf	s.setf(ios_base::unitbuf)	Flush after each output operation
+s<<nounitbuf	s.unsetf(ios_base::unitbuf)	Use stream default flushing
+s<<internal	s.setf(ios_base::internal,ios_base::adjustfield)	Pad between sign and numeric value
+s<<left	s.setf(ios_base::left,ios_base::adjustfield)	Pad after the value
+s<<right	s.setf(ios_base::right,ios_base::adjustfield)	Pad before the value
+s<<dec	s.setf(ios_base::dec,ios_base::basefield)	Output integers in decimal
+s<<hex	s.setf(ios_base::hex,ios_base::basefield)	Output integers in hexadecimal
+s<<oct	s.setf(ios_base::oct,ios_base::basefield)	Output integers in octal
+s<<fixed	s.setf(ios_base::fixed,ios_base::floatfield)	Output floating-point values as ddd.dd
+s<<scientific	s.setf(ios_base::scientific,ios_base::floatfield)	Output floating-point values as d.ddddEdd
+s<<hexfloat	s.setf(ios_base::fixed|ios_base::scientific,ios_base::floatfield)	Use hexadecimal for exponent and mantissa
+s<<defaultfloat	s.unsetf(ios_base::floatfield)	Floating point format depends upon precision
+s<<boolalpha s>>boolalpha	s.setf(ios_base::boolalpha)	Booleans output or input as ‘true’ or ‘false’
+s<<noboolalpha s>>noboolalpha	s.unsetf(ios_base::boolalpha)	Booleans output or input as ‘1’ or ‘0’
+s>>skipws	s.setf(ios_base::skipws)	Skip preceding whitespace
+s>>noskipws	s.unsetf(ios_base::skipws)
