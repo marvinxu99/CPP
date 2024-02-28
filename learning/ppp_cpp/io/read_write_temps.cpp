@@ -25,8 +25,18 @@ int main()
             error("hour out of range");
         temps.push_back(Reading{hour, temperature});
     }
+
+    // Display data
     for (Reading t : temps)
     {
         cout << t.hour << " " << t.temperature << endl;
     }
+
+    // Write temps to a file
+    ofstream ost("otemp.dat");
+    if (!ost)
+        error("can't open output file");
+    for (int i = 0; i < temps.size(); ++i)
+        ost << '(' << temps[i].hour << ','
+            << temps[i].temperature << ")" << endl;
 }
