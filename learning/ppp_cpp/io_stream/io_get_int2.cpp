@@ -51,6 +51,7 @@ try
 {
     int strength = get_int(1, 10, "enter strength", "Not in range, try again");
     cout << "strength: " << strength << '\n';
+
     int altitude = get_int(0, 50000,
                            "Please enter altitude in feet",
                            "Not in range, please try again");
