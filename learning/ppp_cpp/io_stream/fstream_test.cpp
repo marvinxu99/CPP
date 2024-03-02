@@ -87,6 +87,22 @@ try
     // write to binary file:
     for (int x : v)
         ofs2.write(as_bytes(x), sizeof(int)); // note: writing bytes
+    ofs2.close();
+
+    cout << "Opening and check the content..." << endl;
+    string iname3{"fs_test_2.bin"};
+    ifstream ifs3{iname3, ios_base::binary}; // note: stream mode
+    // binary tells the stream not to try anything clever with the bytes
+    if (!ifs3)
+        error("can't open output file ", iname3);
+
+    // read from binary file:
+    for (int x; ifs3.read(as_bytes(x), sizeof(int));) // note: reading bytes
+    {
+        cout << x << " ";
+    }
+    cout << endl;
+
     return 0;
 }
 catch (...)
