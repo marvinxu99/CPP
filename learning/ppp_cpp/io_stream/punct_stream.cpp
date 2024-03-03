@@ -3,7 +3,15 @@
 
 bool Punct_stream::is_whitespace(char c)
 {
-    return white.contains(c);
+    for (char w : white)
+        if (c == w)
+            return true;
+    return false;
+}
+
+Punct_stream::operator bool()
+{
+    return !(source.fail() || source.bad()) && source.good();
 }
 
 Punct_stream &Punct_stream::operator>>(string &s)
@@ -28,4 +36,25 @@ Punct_stream &Punct_stream::operator>>(string &s)
     }
 
     return *this;
+}
+
+int main()
+// given text input, produce a sorted list of all words in that text
+// ignore punctuation and case differences
+// eliminate duplicates from the output
+{
+    Punct_stream ps{cin};
+    ps.whitespace(";:,.?!()\"{}<>/&$@#%^*|~"); // note \" means " in string
+    ps.case_sensitive(false);
+
+    cout << "please enter words\n";
+    vector<string> vs;
+    for (string word; ps >> word;)
+        vs.push_back(word); // read words
+
+    sort(vs.begin(), vs.end()); // sort in lexicographical order
+
+    for (int i = 0; i < vs.size(); ++i) // write dictionary
+        if (i == 0 || vs[i] != vs[i - 1])
+            cout << vs[i] << '\n';
 }
