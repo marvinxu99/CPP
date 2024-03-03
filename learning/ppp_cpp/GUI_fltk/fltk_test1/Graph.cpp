@@ -307,10 +307,14 @@ Suffix::Encoding get_encoding(const string& s)
 }
 
 bool can_open(const string& s)
-            // check if a file named s exists and can be opened for reading
+ // check if a file named s exists and can be opened for reading
 {
 	ifstream ff(s.c_str());
-	return ff;
+	//return ff; 
+	if (!ff) 
+		return false;
+	else 
+		return true;
 }
 
 

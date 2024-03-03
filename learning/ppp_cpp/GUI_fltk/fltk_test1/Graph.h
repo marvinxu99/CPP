@@ -3,11 +3,11 @@
 #define GRAPH_GUARD 1
 
 #include "Point.h"
-#include<vector>
+#include <vector>
 //#include<string>
 //#include<cmath>
 #include "fltk.h"
-//#include "std_lib_facilities.h"
+#include "std_lib_facilities.h"
 
 namespace Graph_lib {
 // defense against ill-behaved Linux macros:
@@ -85,7 +85,8 @@ private:
 	int f;
 };
 
-template<class T> class Vector_ref {
+template<class T> 
+class Vector_ref {
 	vector<T*> v;
 	vector<T*> owned;
 public:
@@ -156,7 +157,8 @@ public:
 	Shape& operator=(const Shape&) = delete;
 private:
 	vector<Point> points;	// not used by all shapes
-	Color lcolor {fl_color()};
+//	Color lcolor {fl_color()};       // by MX
+	Color lcolor {fill_color()};     // by MX
 	Line_style ls {0};
 	Color fcolor {Color::invisible};
 

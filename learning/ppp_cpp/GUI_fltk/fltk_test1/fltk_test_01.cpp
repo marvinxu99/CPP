@@ -1,5 +1,7 @@
 #include "Simple_window.h" // get access to our window library
+//#include "window.h" // get access to our window library
 #include "Graph.h"         // get access to our graphics library facilities
+
 int main()
 {
     using namespace Graph_lib; // our graphics facilities are in Graph_lib
@@ -8,7 +10,7 @@ int main()
 
     Simple_window win{tl, 600, 400, "Canvas"}; // make a simple window
 
-    Polygon poly;               // make a shape (a polygon)
+    struct Polygon poly;        // make a shape (a polygon)
     poly.add(Point{300, 200});  // add a point
     poly.add(Point{350, 100});  // add another point
     poly.add(Point{400, 200});  // add a third point
