@@ -1,5 +1,5 @@
 #include "Graph.h"
-#include<map>
+#include <map>
 
 namespace Graph_lib {
 

@@ -33,17 +33,57 @@ try{
     
     win.set_label("Canvas #3");
 
-    win.wait_for_button(); // display!
+    Function sine{ sin,0,100,Point{20,150},1000,50,50 }; // sine curve
+    // plot sin() in the range [0:100) with (0,0) at (20,150)
+    // using 1000 points; scale x values *50, scale y values *50
+    win.attach(sine);
+    win.set_label("Canvas #4");
+  
+    // Polygon
+    struct Polygon poly;        // make a shape (a polygon)
+    poly.add(Point{300, 200});  // add a point
+    poly.add(Point{350, 100});  // add another point
+    poly.add(Point{400, 200});  // add a third point
+    poly.set_color(Color::red); // adjust properties of poly
+    win.attach(poly); // connect poly to the window
 
-    //struct Polygon poly;        // make a shape (a polygon)
-    //poly.add(Point{300, 200});  // add a point
-    //poly.add(Point{350, 100});  // add another point
-    //poly.add(Point{400, 200});  // add a third point
-    //poly.set_color(Color::red); // adjust properties of poly
+    struct Rectangle r{ Point{200,200}, 100, 50 }; // top left corner, width, height
+    win.attach(r);
+    win.set_label("Canvas #6");
 
-    //win.attach(poly); // connect poly to the window
+    struct Closed_polyline poly_rect;
+    poly_rect.add(Point{ 100,50 });
+    poly_rect.add(Point{ 200,50 });
+    poly_rect.add(Point{ 200,100 });
+    poly_rect.add(Point{ 100,100 });
+    poly_rect.add(Point{ 50,75 });
+    win.attach(poly_rect);
 
-    //win.wait_for_button(); // give control to the display engine
+    // Fill
+    r.set_fill_color(Color::yellow); // color the inside of the rectangle
+    poly.set_style(Line_style(Line_style::dash, 4));
+    poly_rect.set_style(Line_style(Line_style::dash, 2));
+    poly_rect.set_fill_color(Color::green);
+    win.set_label("Canvas #7");
+
+    // Text
+    struct Text t{ Point{150,150}, "Hello, graphical world!" };
+    win.attach(t);
+    win.set_label("Canvas #8");
+
+    t.set_font(Font::times_bold);
+    t.set_font_size(20);
+    win.set_label("Canvas #9");
+
+    // Load image
+    Image ii{ Point{100,50},"images.jpg" }; // 400*212-pixel jpg
+    win.attach(ii);
+    win.set_label("Canvas #10");
+
+    ii.move(100, 200);
+    win.set_label("Canvas #11");
+
+    win.wait_for_button(); // give control to the display engine
 
 }
 catch (exception& e) {

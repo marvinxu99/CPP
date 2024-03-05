@@ -158,7 +158,7 @@ public:
 private:
 	vector<Point> points;	// not used by all shapes
 //	Color lcolor {fl_color()};       // by MX
-	Color lcolor {fill_color()};     // by MX
+	Color lcolor { Color::black };   // by MX
 	Line_style ls {0};
 	Color fcolor {Color::invisible};
 
@@ -168,7 +168,8 @@ private:
 
 struct Function : Shape {
 	// the function parameters are not stored
-	Function(Fct f, double r1, double r2, Point orig, int count = 100, double xscale = 25, double yscale = 25);
+	//Function(Fct f, double r1, double r2, Point orig, int count = 100, double xscale = 25, double yscale = 25);
+	Function(Fct f, double r1, double r2, Point orig, int count = 100, double xscale = 1, double yscale = 1);
 	//Function(Point orig, Fct f, double r1, double r2, int count, double xscale = 1, double yscale = 1);	
 };
 
