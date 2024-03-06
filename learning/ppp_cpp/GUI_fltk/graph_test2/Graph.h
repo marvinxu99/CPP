@@ -117,7 +117,12 @@ typedef double Fct(double);
 class Shape  {	// deals with color and style, and holds sequence of lines
 protected:
 	Shape() { }
-	Shape(initializer_list<Point> lst);  // add() the Points to this Shape
+	Shape(initializer_list<Point> lst)  // add() the Points to this Shape
+	{
+		for (Point p : lst) {
+			add(p);
+		}
+	}
 
 //	Shape() : lcolor(fl_color()),
 //		ls(0),
@@ -157,8 +162,8 @@ public:
 	Shape& operator=(const Shape&) = delete;
 private:
 	vector<Point> points;			// not used by all shapes
-//	Color lcolor {fl_color()};      // by MX
-	Color lcolor { Color::black };  // by MX
+	Color lcolor { Fl_Color() };    // by MX
+//	Color lcolor { Color::black };	// by MX
 	Line_style ls {0};
 	Color fcolor {Color::invisible};
 
@@ -238,7 +243,12 @@ struct Polygon : Closed_polyline {	// closed sequence of non-intersecting lines
 
 struct Lines : Shape {	// indepentdent lines
 	Lines() {}
-	Lines(initializer_list<Point> lst) : Shape{lst} { if (lst.size() % 2) error("odd number of points for Lines"); }
+	Lines(initializer_list<Point> lst) : Shape{lst} { 
+		if (lst.size() % 2) error("odd number of points for Lines"); 
+	}
+	Lines(initializer_list<pair<Point, Point>> lst) {
+		for (auto p : lst) add(p.first, p.second);
+	}
 	void draw_lines() const;
 	void add(Point p1, Point p2) { Shape::add(p1); Shape::add(p2); }
 };

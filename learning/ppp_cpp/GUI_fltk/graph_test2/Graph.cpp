@@ -121,7 +121,8 @@ void Shape::move(int dx, int dy)
 
 void Lines::draw_lines() const
 {
-//	if (number_of_points()%2==1) error("odd number of points in set of lines");
+//	if (number_of_points()%2==1) error("odd number of points in set of lines");		// We don’t need to check that the number of points is
+																					// even — Lines’ add() can add only pairs of points
 	if (color().visibility())
 		for (int i=1; i<number_of_points(); i+=2)
 			fl_line(point(i-1).x,point(i-1).y,point(i).x,point(i).y);
