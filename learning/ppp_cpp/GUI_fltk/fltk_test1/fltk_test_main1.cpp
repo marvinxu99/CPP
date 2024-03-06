@@ -83,6 +83,21 @@ try{
     ii.move(100, 200);
     win.set_label("Canvas #11");
 
+    struct Circle c{ Point{100,200},50 };
+    struct Ellipse e{ Point{100,200}, 75,25 };
+    e.set_color(Color::dark_red);
+    struct Mark m { Point{ 100,200 }, 'x' };
+    win.attach(c);
+    win.attach(m);
+    win.attach(e);
+    
+    ostringstream oss;
+    oss << "screen size: " << x_max() << "*" << y_max()
+    << "; window size: " << win.x_max() << "*" << win.y_max();
+    Text sizes {Point{100,20},oss.str()};
+    win.attach(sizes);
+    win.set_label("Canvas #12");
+
     win.wait_for_button(); // give control to the display engine
 
 }

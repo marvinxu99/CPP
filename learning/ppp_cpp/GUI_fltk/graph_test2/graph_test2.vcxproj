@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7379e64e-fbd8-49c5-b500-20c2a87de18d}</ProjectGuid>
-    <RootNamespace>fltktest1</RootNamespace>
+    <ProjectGuid>{fc103aa6-93ab-4add-8e50-80b5e441c0ab}</ProjectGuid>
+    <RootNamespace>graphtest2</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -74,10 +74,6 @@
     <IncludePath>E:\eDev\lib_external\fltk_1.3.9;$(IncludePath)</IncludePath>
     <LibraryPath>E:\eDev\lib_external\fltk_1.3.9\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>E:\eDev\libs_external\fltk_1.3.9;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\eDev\libs_external\fltk_1.3.9\lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -117,8 +113,6 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
       <AdditionalDependencies>fltkd.lib;fltkjpegd.lib;fltkimagesd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -130,22 +124,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\eDev\libs_external\fltk_1.3.9\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="fltk_test_main1.cpp" />
-    <ClCompile Include="Graph.cpp" />
-    <ClCompile Include="GUI.cpp" />
-    <ClCompile Include="Window.cpp" />
-  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fltk.h" />
     <ClInclude Include="Graph.h" />
@@ -154,6 +140,12 @@
     <ClInclude Include="Simple_window.h" />
     <ClInclude Include="std_lib_facilities.h" />
     <ClInclude Include="Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="graph_test_main2.cpp" />
+    <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
