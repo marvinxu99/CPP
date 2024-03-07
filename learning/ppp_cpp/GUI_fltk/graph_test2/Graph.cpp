@@ -243,7 +243,6 @@ void Circle::draw_lines() const
 	}
 }
 
-
 void Ellipse::draw_lines() const
 {
 	if (fill_color().visibility()) {	// fill

@@ -92,7 +92,7 @@ try{
     }
 
     // Closed polyline
-    if (true) {
+    if (false) {
         Point tl{ 100, 100 };                             // to become top left corner of window
         Simple_window win3{ tl,600,400,"Grid" };   // screen coordinate tl for top left corner
 
@@ -175,8 +175,59 @@ try{
             }
 
         win3.wait_for_button(); // give control to the display engine
-
     }
+
+    if (false) {
+        Point tl{ 100, 100 };                       // to become top left corner of window
+        Simple_window win3{ tl,600,400,"Grid" };    // screen coordinate tl for top left corner
+
+        Circle c1{ Point{100,200},50 };
+        Circle c2{ Point{150,200},100 };
+        Circle c3{ Point{200,200},150 };
+
+        c1.set_color(Color::red);
+        c2.set_color(Color::dark_cyan);
+        c3.set_color(Color::dark_green);
+
+        win3.attach(c1);
+        win3.attach(c2);
+        win3.attach(c3);
+
+        win3.wait_for_button(); // give control to the display engine
+    }
+
+    if (false) {
+        Point tl{ 100, 100 };                       // to become top left corner of window
+        Simple_window win3{ tl,600,400,"Grid" };    // screen coordinate tl for top left corner
+
+        Graph_lib::Ellipse e1{ Point{200,200},50,50 };
+        Graph_lib::Ellipse e2{ Point{200,200},100,50 };
+        Graph_lib::Ellipse e3{ Point{200,200},100,150 };
+
+        e1.set_color(Color::red);
+        e2.set_color(Color::dark_yellow);
+        e3.set_color(Color::dark_green);
+
+        win3.attach(e1);
+        win3.attach(e2);
+        win3.attach(e3);
+
+        win3.wait_for_button(); // give control to the display engine
+    }
+
+    if (true) {
+        Point tl{ 100, 100 };                       // to become top left corner of window
+        Simple_window win3{ tl,600,400,"Grid" };    // screen coordinate tl for top left corner
+
+        Marked_polyline mpl{ "1234",{{100,100}, {150,200}, {250,250}, {300,200}} };
+
+        mpl.set_color(Color::red);
+
+        win3.attach(mpl);
+
+        win3.wait_for_button(); // give control to the display engine
+    }
+
 }
 catch (exception& e) {
     cout << "Caught error: " << e.what() << endl;

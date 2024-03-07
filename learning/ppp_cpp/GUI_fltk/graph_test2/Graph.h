@@ -297,7 +297,7 @@ struct Axis : Shape {
 struct Circle : Shape {
 	Circle(Point p, int rr)	// center and radius
 	:r{ rr } {
-		add(Point{ p.x - r, p.y - r });
+		add(Point{ p.x - r, p.y - r });	// store top left corner for FLTK optimized circle-drawing routine
 	}
 
 	void draw_lines() const;
@@ -313,14 +313,24 @@ private:
 
 struct Ellipse : Shape {
 	Ellipse(Point p, int ww, int hh)	// center, min, and max distance from center
-	:w{ ww }, h{ hh } {
+		:w{ ww }, h{ hh } 
+	{
 		add(Point{ p.x - ww, p.y - hh });
 	}
 
 	void draw_lines() const;
 
 	Point center() const { return{ point(0).x + w, point(0).y + h }; }
-	Point focus1() const { return{ center().x + int(sqrt(double(w*w - h*h))), center().y }; }
+	
+	//Point focus1() const { return{ center().x + int(sqrt(double(w*w - h*h))), center().y }; }
+	Point focus1() const
+	{
+		if (h <= w) // foci are on the x axis:
+			return { center().x + int(sqrt(double(w * w-h * h))),center().y };
+		else // foci are on the y axis:
+			return { center().x,center().y + int(sqrt(double(h * h-w * w))) };
+	}
+
 	Point focus2() const { return{ center().x - int(sqrt(double(w*w - h*h))), center().y }; }
 	
 	void set_major(int ww) { w=ww; }
@@ -331,6 +341,7 @@ private:
 	int w;
 	int h;
 };
+
 /*
 struct Mark : Text {
 	static const int dw = 4;
@@ -340,7 +351,13 @@ struct Mark : Text {
 */
 
 struct Marked_polyline : Open_polyline {
-	Marked_polyline(const string& m) :mark(m) { }
+	Marked_polyline(const string& m) :mark{ m } { if (m == "") mark = "*"; }
+	Marked_polyline(const string& m, initializer_list<Point> lst)
+		:Open_polyline{ lst },
+		mark{ m }
+	{
+		if (m == "") mark = "*";
+	}
 	void draw_lines() const;
 private:
 	string mark;
