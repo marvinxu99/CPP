@@ -16,11 +16,20 @@ namespace Graph_lib {
 
 struct Color {
 	enum Color_type {
-		red=FL_RED, blue=FL_BLUE, green=FL_GREEN,
-		yellow=FL_YELLOW, white=FL_WHITE, black=FL_BLACK,
-		magenta=FL_MAGENTA, cyan=FL_CYAN, dark_red=FL_DARK_RED,
-		dark_green=FL_DARK_GREEN, dark_yellow=FL_DARK_YELLOW, dark_blue=FL_DARK_BLUE,
-		dark_magenta=FL_DARK_MAGENTA, dark_cyan=FL_DARK_CYAN
+		red=FL_RED, 
+		blue=FL_BLUE, 
+		green=FL_GREEN,
+		yellow=FL_YELLOW, 
+		white=FL_WHITE, 
+		black=FL_BLACK,
+		magenta=FL_MAGENTA, 
+		cyan=FL_CYAN, 
+		dark_red=FL_DARK_RED,
+		dark_green=FL_DARK_GREEN, 
+		dark_yellow=FL_DARK_YELLOW, 
+		dark_blue=FL_DARK_BLUE,
+		dark_magenta=FL_DARK_MAGENTA, 
+		dark_cyan=FL_DARK_CYAN
 	};
 	enum Transparency { invisible = 0, visible=255 };
 
@@ -117,12 +126,7 @@ typedef double Fct(double);
 class Shape  {	// deals with color and style, and holds sequence of lines
 protected:
 	Shape() { }
-	Shape(initializer_list<Point> lst)  // add() the Points to this Shape
-	{
-		for (Point p : lst) {
-			add(p);
-		}
-	}
+	Shape(initializer_list<Point> lst) : points{ lst } { } // add() the Points to this Shape
 
 //	Shape() : lcolor(fl_color()),
 //		ls(0),
@@ -222,16 +226,16 @@ bool intersect(Point p1, Point p2, Point p3, Point p4);
 
 
 struct Open_polyline : Shape {	// open sequence of lines
-	using Shape::Shape;
+	using Shape::Shape;			// use Shape’s constructors
+	Open_polyline(initializer_list<Point> lst) : Shape{ lst } { }    // added MX because of error
 	void add(Point p) { Shape::add(p); }
-	void draw_lines() const;
+	void draw_lines() const;					// MX: we do not need this as Shape:: add() is public
 };
 
 struct Closed_polyline : Open_polyline {	// closed sequence of lines
 	using Open_polyline::Open_polyline;
-	void draw_lines() const;
-	
-//	void add(Point p) { Shape::add(p); }
+
+	void draw_lines() const;                // MX: We might not event need this
 };
 
 

@@ -21,7 +21,6 @@ void Shape::draw() const
 	fl_line_style(0);
 }
 
-
 // does two lines (p1,p2) and (p3,p4) intersect?
 // if se return the distance of the intersect point as distances from p1
 inline pair<double,double> line_intersect(Point p1, Point p2, Point p3, Point p4, bool& parallel) 
@@ -76,10 +75,8 @@ void Polygon::add(Point p)
 			error("intersect in polygon");
 	}
 	
-
 	Closed_polyline::add(p);
 }
-
 
 void Polygon::draw_lines() const
 {
@@ -109,8 +106,12 @@ void Closed_polyline::draw_lines() const
 	Open_polyline::draw_lines();
 		
 	if (color().visibility())	// draw closing line:
-		fl_line(point(number_of_points()-1).x,point(number_of_points()-1).y,point(0).x,point(0).y);
+		fl_line(point(number_of_points()-1).x,
+			point(number_of_points()-1).y,
+			point(0).x,
+			point(0).y);
 }
+
 void Shape::move(int dx, int dy)
 {
 	for (unsigned int i = 0; i<points.size(); ++i) {
