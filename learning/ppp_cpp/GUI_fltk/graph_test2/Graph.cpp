@@ -301,7 +301,8 @@ Suffix::Encoding get_encoding(const string& s)
 	static int x = init_suffix_map();
 
 	string::const_iterator p = find(s.begin(),s.end(),'.');
-	if (p==s.end()) return Suffix::none;	// no suffix
+	if (p==s.end()) 
+		return Suffix::none;	// no suffix
 
 	string suf(p+1,s.end());
 	return suffix_map[suf];

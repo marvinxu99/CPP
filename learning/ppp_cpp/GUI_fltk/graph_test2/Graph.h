@@ -166,8 +166,7 @@ public:
 	Shape& operator=(const Shape&) = delete;
 private:
 	vector<Point> points;			// not used by all shapes
-	Color lcolor { Fl_Color() };    // by MX
-//	Color lcolor { Color::black };	// by MX
+	Color lcolor { Fl_Color() }; 
 	Line_style ls {0};
 	Color fcolor {Color::invisible};
 
@@ -364,12 +363,20 @@ private:
 };
 
 struct Marks : Marked_polyline {
-	Marks(const string& m) :Marked_polyline(m)
-	{ set_color(Color(Color::invisible)); }
+	Marks(const string& m) :Marked_polyline(m)	{ 
+		set_color(Color::invisible); 
+	}
+	Marks(const string& m, initializer_list<Point> lst)
+		: Marked_polyline{ m,lst }
+	{
+		set_color(Color::invisible);
+	}
 };
 
 struct Mark : Marks {
-	Mark(Point xy, char c) : Marks(string(1,c)) {add(xy); }
+	Mark(Point xy, char c) : Marks(string(1,c)) {
+		add(xy); 
+	}
 };
 
 /*
@@ -398,7 +405,9 @@ struct Image : Shape {
 	Image(Point xy, string s, Suffix::Encoding e = Suffix::none);
 	~Image() { delete p; }
 	void draw_lines() const;
-	void set_mask(Point xy, int ww, int hh) { w=ww; h=hh; cx=xy.x; cy=xy.y; }
+	void set_mask(Point xy, int ww, int hh) {
+		w=ww; h=hh; cx=xy.x; cy=xy.y; 
+	}
 	void move(int dx,int dy) { Shape::move(dx,dy); p->draw(point(0).x,point(0).y); }
 private:
 	int w,h,cx,cy; // define "masking box" within image relative to position (cx,cy)
