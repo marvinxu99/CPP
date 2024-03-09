@@ -146,6 +146,7 @@
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="graph_test_main.cpp" />
     <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="overriding.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
