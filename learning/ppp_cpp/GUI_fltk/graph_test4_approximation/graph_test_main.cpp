@@ -4,21 +4,31 @@
 
 class mmm {
 private: 
-    int _d1{ 0 };
+    int m_d1{ 0 };
 
 public:
-    int d1() const { return _d1; }
-    void d1(int value) { _d1 = value; }
+    int d1() const { return m_d1; }
+    void d1(int value) { m_d1 = value; }
 
 };
+
+int fac(int n) // factorial(n); n!
+{
+    int r = 1;
+    while (n > 1) {
+        r *= n;
+        --n;
+    }
+    return r;
+}
 
 int main()
 try{
     using namespace Graph_lib; // our graphics facilities are in Graph_lib
 
-    mmm m;
+    /*mmm m;
     m.d1(2);
-    cout << m.d1() << endl;
+    cout << m.d1() << endl;*/
 
 
     if (true) {
@@ -40,7 +50,6 @@ try{
 
         win1.wait_for_button(); // give control to the display engine
     }
-
 
 }
 catch (exception& e) {

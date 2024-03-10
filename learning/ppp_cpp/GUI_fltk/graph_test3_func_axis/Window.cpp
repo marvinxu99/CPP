@@ -39,19 +39,19 @@ void Window::attach(Widget& w)
 
 void Window::detach(Widget& b)
 {
-	  b.hide();
+	 b.hide();
 }
 
 void Window::attach(Shape& s)
 {
-		shapes.push_back(&s);
+	shapes.push_back(&s);
 //		s.attached = this;
 }
 void Window::detach(Shape& s)
 {
-		for (int i = static_cast<int>(shapes.size()); 0<i; --i)	// guess last attached will be first released
-			if (shapes[i-1]==&s)
-				shapes.erase(shapes.begin()+(i-1));//&shapes[i-1]);
+	for (int i = static_cast<int>(shapes.size()); 0<i; --i)	// guess last attached will be first released
+		if (shapes[i-1]==&s)
+			shapes.erase(shapes.begin()+(i-1));//&shapes[i-1]);
 }
 
 

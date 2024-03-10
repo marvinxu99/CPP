@@ -164,8 +164,7 @@ private:
 
 struct Function : Shape {
 	// the function parameters are not stored
-	//Function(Fct f, double r1, double r2, Point orig, int count = 100, double xscale = 25, double yscale = 25);
-	Function(Fct f, double r1, double r2, Point orig, int count = 100, double xscale = 1, double yscale = 1);
+	Function(Fct f, double r1, double r2, Point orig, int count = 100, double xscale = 25, double yscale = 25);
 	//Function(Point orig, Fct f, double r1, double r2, int count, double xscale = 1, double yscale = 1);	
 };
 
@@ -264,21 +263,19 @@ private:
 	int fnt_sz{ (14<fl_size()) ? fl_size() : 14 };	// at least 14 point
 };
 
-
+// Axis is an example of an object composed of several semi - independent objects
 struct Axis : Shape {
 	// representation left public
 	enum Orientation { x, y, z };
+
 	Axis(Orientation d, Point xy, int length, int nummber_of_notches=0, string label = "");
 
-	void draw_lines() const;
-	void move(int dx, int dy);
-
+	void draw_lines() const override;
+	void move(int dx, int dy) override;
 	void set_color(Color c);
 
 	Text label;
 	Lines notches;
-//	Orientation orin;
-//	int notches;
 };
 
 struct Circle : Shape {

@@ -167,51 +167,56 @@ void Rectangle::draw_lines() const
 }
 
 
-Axis::Axis(Orientation d, Point xy, int length, int n, string lab)
-	:label(Point(0,0),lab)
+Axis::Axis(Orientation d, Point xy, int length, int num_notches, string label_text)
+	:label(Point(0,0),label_text)
 {
-	if (length<0) error("bad axis length");
+	if (length < 0) error("bad axis length");
+
 	switch (d){
-	case Axis::x:
+		case Axis::x:
 		{	Shape::add(xy);	// axis line
 			Shape::add(Point(xy.x+length,xy.y));	// axis line
-			if (1<n) {
-				int dist = length/n;
-				int x = xy.x+dist;
-				for (int i = 0; i<n; ++i) {
-					notches.add(Point(x,xy.y),Point(x,xy.y-5));
-				x += dist;
+
+			if (1 < num_notches) {
+					int dist = length / num_notches;
+					int x = xy.x+dist;
+					for (int i = 0; i < num_notches; ++i) {
+						notches.add(Point(x,xy.y),Point(x,xy.y-5));
+					x += dist;
+				}
 			}
+
+			// label under the line
+			label.move(length/3,xy.y+20);
+			break;
 		}
-		// label under the line
-		label.move(length/3,xy.y+20);
-		break;
-	}
-	case Axis::y:
+		case Axis::y:
 		{	Shape::add(xy);	// a y-axis goes up
 			Shape::add(Point(xy.x,xy.y-length));
-			if (1<n) {
-			int dist = length/n;
-			int y = xy.y-dist;
-			for (int i = 0; i<n; ++i) {
-				notches.add(Point(xy.x,y),Point(xy.x+5,y));
-				y -= dist;
+
+			if (1 < num_notches) {
+				int dist = length/ num_notches;
+				int y = xy.y-dist;
+				for (int i = 0; i < num_notches; ++i) {
+					notches.add(Point(xy.x,y),Point(xy.x+5,y));
+					y -= dist;
+				}
 			}
+
+			// label at top
+			label.move(xy.x-10,xy.y-length-10);
+			break;
 		}
-		// label at top
-		label.move(xy.x-10,xy.y-length-10);
-		break;
-	}
-	case Axis::z:
-		error("z axis not implemented");
+		case Axis::z:
+			error("z axis not implemented");
 	}
 }
 
 void Axis::draw_lines() const
 {
-	Shape::draw_lines();	// the line
-	notches.draw();	// the notches may have a different color from the line
-	label.draw();	// the label may have a different color from the line
+	Shape::draw_lines();	// the axis line
+	notches.draw();			// the notches may have a different color from the line
+	label.draw();			// the label may have a different color from the line
 }
 
 
