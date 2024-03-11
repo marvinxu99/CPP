@@ -1,5 +1,7 @@
 #include "Graph.h"
 #include <map>
+#include <functional> // Include <functional> for std::function
+
 
 namespace Graph_lib {
 
