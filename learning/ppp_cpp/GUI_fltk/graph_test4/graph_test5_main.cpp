@@ -1,7 +1,8 @@
+#include <filesystem>
+
 #include "Simple_window.h" // get access to our window library
 //#include "window.h" // get access to our window library
 #include "Graph.h"         // get access to our graphics library facilities
-#include <functional> // Include <functional> for std::function
 
 
 struct Distribution {
@@ -29,11 +30,27 @@ istream& operator>>(istream& is, Distribution& d)
     return is;
 }
 
+class Scale { // data value to coordinate conversion
+    int cbase; // coordinate base
+    int vbase; // base of values
+    double scale;
+public:
+    Scale(int b, int vb, double s) :cbase{ b }, vbase{ vb }, scale{ s } { }
+    int operator()(int v) const { return cbase + (v-vbase)*scale; } 
+};
 
 int main()
 try{
     using namespace Graph_lib; // our graphics facilities are in Graph_lib
 
+    cout << "Current path is " << filesystem::current_path() << endl; // (1)
+    //filesystem::current_path(filesystem::temp_directory_path());            // (3)
+    //std::cout << "Current path is " << filesystem::current_path() << '\n';
+
+
+    string file_name = "japanese-age-data.txt";
+    ifstream ifs{ file_name };
+    if (!ifs) error("can't open ", file_name);
 
     if (true) {
         constexpr int xmax = 600; // window size
@@ -48,37 +65,68 @@ try{
         constexpr int xlength = xmax - xoffset - xspace; // length of axes
         constexpr int ylength = ymax - yoffset - yspace;
 
+        constexpr int base_year = 1960;
+        constexpr int end_year = 2040;
 
-        constexpr int xmax = 600; // window size
-        constexpr int ymax = 400;
+        constexpr double xscale = double(xlength) / (end_year-base_year);
+        constexpr double yscale = double(ylength) / 100;
 
-        constexpr int x_orig = xmax / 2; // position of (0,0) is center of window
-        constexpr int y_orig = ymax / 2;
-        constexpr Point orig{ x_orig,y_orig };
+        Scale xs{ xoffset,base_year,xscale };
+        Scale ys{ ymax-yoffset,0,-yscale };
 
-        Point tl{ 100, 100 };                             // to become top left corner of window
-        Simple_window win{ Point{100,100},xmax,ymax,"Function graphing" };
+        Simple_window win{ Point{100,100},xmax,ymax,"Aging Japan" };
 
-        constexpr int r_min = -10; // range [–10:11)
-        constexpr int r_max = 11;
-        constexpr int n_points = 400; // number of points used in range
-        constexpr int x_scale = 30; // scaling factors
-        constexpr int y_scale = 30;
-
-        constexpr int xlength = xmax - 40; // make the axis a bit smaller than the window
-        constexpr int ylength = ymax - 40;
         
-        Axis x{ Axis::x,Point{20,y_orig}, xlength, xlength / x_scale, "one notch == 1" };
-        x.set_color(Color::red);
-        x.label.move(-160, 0);
-        x.notches.set_color(Color::dark_red);
-
-        Axis y{ Axis::y,Point{x_orig, ylength + 20}, ylength, ylength / y_scale, "one notch == 1" };
-        y.set_color(Color::red);
+        Axis x{ Axis::x, Point{xoffset, ymax-yoffset}, xlength, 
+                (end_year-base_year) / 10, 
+                "year    1960    1970     1980     1990     "
+                "  2000      2010      2020      2030      2040" };
+        x.label.move(-100, 0);
+        //x.notches.set_color(Color::dark_red);
         win.attach(x);
+
+        Axis y{ Axis::y, Point{xoffset, ymax - yoffset}, ylength, 10, "% of population" };
+        //y.set_color(Color::red);
         win.attach(y);
 
+        Line current_year{ Point{xs(2008),ys(0)},Point{xs(2008),ys(100)} };
+        current_year.set_style(Line_style::dash);
+        win.attach(current_year);
             
+        Open_polyline children;
+        Open_polyline adults;
+        Open_polyline aged;
+
+        for (Distribution d; ifs >> d; ) {
+            if (d.year < base_year || end_year < d.year) error("year out of range");
+            if (d.young + d.middle + d.old != 100)
+                error("percentages don't add up");
+            const int x = xs( d.year );
+            children.add(Point{ x,ys(d.young) });
+            adults.add(Point{ x,ys(d.middle) });
+            aged.add(Point{ x,ys(d.old) });
+        }
+
+        Text children_label{ Point{20,children.point(0).y},"age 0-14" };
+        children.set_color(Color::red);
+        children_label.set_color(Color::red);
+
+        Text adults_label{ Point{20,adults.point(0).y},"age 15-64" };
+        adults.set_color(Color::blue);
+        adults_label.set_color(Color::blue);
+        
+        Text aged_label{ Point{20,aged.point(0).y},"age 65+" };
+        aged.set_color(Color::dark_green);
+        aged_label.set_color(Color::dark_green);
+
+        win.attach(children);
+        win.attach(adults);
+        win.attach(aged);
+
+        win.attach(children_label);
+        win.attach(adults_label);
+        win.attach(aged_label);
+
         win.wait_for_button(); // give control to the display engine
     }
 

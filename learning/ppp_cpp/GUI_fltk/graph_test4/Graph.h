@@ -214,6 +214,7 @@ bool intersect(Point p1, Point p2, Point p3, Point p4);
 
 struct Open_polyline : Shape {	// open sequence of lines
 	using Shape::Shape;			// use Shape’s constructors
+	Open_polyline(): Shape() { }
 	Open_polyline(initializer_list<Point> lst) : Shape{ lst } { }    // added MX because of error
 	void add(Point p) { Shape::add(p); }
 	void draw_lines() const;					// MX: we do not need this as Shape:: add() is public
