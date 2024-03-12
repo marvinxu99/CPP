@@ -45,7 +45,7 @@ try{
 
     cout << "Current path is " << filesystem::current_path() << endl; // (1)
     //filesystem::current_path(filesystem::temp_directory_path());            // (3)
-    //std::cout << "Current path is " << filesystem::current_path() << '\n';
+    //std::cout << "Current path is " << filesystem::current_path() << endl;
 
 
     string file_name = "japanese-age-data.txt";
