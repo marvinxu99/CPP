@@ -65,7 +65,7 @@ namespace Graph_lib {
             : Widget(xy,w,h,label,cb)
         {}
 
-        void attach(Window&);
+        void attach(Window&) override;
 
         ~Button() override {
             if (pw != nullptr) delete pw;
@@ -80,7 +80,7 @@ namespace Graph_lib {
         int get_int();
         string get_string();
 
-        void attach(Window& win);
+        void attach(Window& win) override;
     };
 
 //------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ namespace Graph_lib {
         void put(int);
         void put(const string&);
 
-        void attach(Window& win);
+        void attach(Window& win) override;
     };
 
 //------------------------------------------------------------------------------
