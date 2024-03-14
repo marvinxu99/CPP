@@ -5,6 +5,18 @@
 #include "Graph.h"         // get access to our graphics library facilities
 
 
+struct Lines_window : Window {
+    Lines_window(Point xy, int w, int h, const string& title);
+    Open_polyline lines;
+private:
+    Button next_button; // add (next_x,next_y) to lines
+    Button quit_button;
+    In_box next_x;
+    In_box next_y;
+    Out_box xy_out;
+    void next();
+    void quit();
+};
 
 int main()
 try{
@@ -36,7 +48,7 @@ try{
 
         Simple_window win{ Point{100,100},xmax,ymax,"Aging Japan" };
 
-        
+
         Axis x{ Axis::x, Point{xoffset, ymax-yoffset}, xlength, 
                 (end_year-base_year) / 10, 
                 "year    1960    1970     1980     1990     "
