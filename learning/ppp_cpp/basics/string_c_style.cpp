@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -24,4 +25,7 @@ int main()
     string pc3 = "Howdy";
     cout << pc3.length() << endl;
     cout << pc3.c_str() << endl;
+
+    vector v1{10};
+    v1.
 }
