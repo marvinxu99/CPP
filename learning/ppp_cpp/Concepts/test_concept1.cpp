@@ -3,10 +3,13 @@
 #include <sstream>
 
 template <typename T>
-// concept Integral = std::is_integral_v<T>;
-concept Integral = std::is_integral_v<T> || std::is_floating_point_v<T>;
+concept Integral = std::is_integral_v<T>;
 
-template <Integral T>
+template <typename T>
+concept Number1 = std::is_integral_v<T> || std::is_floating_point_v<T>;
+
+// template <Integral T>
+template <Number1 T>
 void printValue(T value)
 {
     std::cout << "Value: " << value << std::endl;
